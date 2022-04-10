@@ -29,6 +29,8 @@ All raw files of the electoral results are located in the `data-raw/` folder.
 - [Presidential election 2017 (round 1) - bureaux de vote](https://www.data.gouv.fr/fr/datasets/election-presidentielle-des-23-avril-et-7-mai-2017-resultats-definitifs-du-1er-tour-par-bureaux-de-vote/)
 - [Presidential election 2017 (round 1) - communes](https://www.data.gouv.fr/fr/datasets/election-presidentielle-des-23-avril-et-7-mai-2017-resultats-du-1er-tour-1/)
 - [Presidential election 2017 (round 1) - national, région, départements, cantons, circonscriptions ](https://www.data.gouv.fr/fr/datasets/election-presidentielle-des-23-avril-et-7-mai-2017-resultats-du-1er-tour/)
+
+- [Presidential election 2017 (round 2) - bureaux de vote](https://www.data.gouv.fr/fr/datasets/election-presidentielle-des-23-avril-et-7-mai-2017-resultats-definitifs-du-2nd-tour-par-bureaux-de-vote/)
 - [Presidential election 2017 (round 2) - national, région, départements, cantons, circonscriptions](https://www.data.gouv.fr/fr/datasets/election-presidentielle-des-23-avril-et-7-mai-2017-resultats-du-1er-tour-1/)
 - [Presidential election 2017 (round 2) - communes](https://www.data.gouv.fr/fr/datasets/election-presidentielle-des-23-avril-et-7-mai-2017-resultats-du-2eme-tour-2/)
 
