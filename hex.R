@@ -4,8 +4,8 @@ library(hexSticker)
 
 sticker(
   "~/Dropbox/Sondapol/phrygien.jpeg",
-  package="presidentielle2022",
-  p_size = 15,
+  package="Presidentielle 2022",
+  p_size = 18,
   p_x = 1,
   p_y = 0.625,
   p_color = "#EF4135",
