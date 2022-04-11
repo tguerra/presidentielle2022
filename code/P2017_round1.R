@@ -1,3 +1,6 @@
+#### code by Joel gombin
+#### source : https://github.com/datactivist/presidentielle2017
+
 library(readxl) # read excel files
 library(stringr) # manipulate string of characters
 library(LireMinInterieur) # transform electoral files
