@@ -3,9 +3,14 @@ library(stringr) # manipulate string of characters
 library(LireMinInterieur) # transform electoral files
 library(tidyverse) # the tidyverse...
 
-pres_2022_R1_departements <- read_excel("./data-raw/XXXXX.xls", skip = 3, guess_max = 25, sheet = "Départements Tour 1")
+pres_2022_R1_departements <- read_excel("./data-raw/2022/resultats-par-niveau-dpt-t1-france-entiere.xlsx", 
+                                        guess_max = 25, sheet = "Résultats par niveau Dpt T1 Fra") %>% 
+                                mutate(Inscrits = as.numeric(Inscrits))
 
-pres_2022_R1_departements_cleaned <- lire(pres_2022_R1_departements, keep = c("Code du département", "Libellé du département", "Inscrits", "Abstentions", "Exprimés", "Blancs", "Nuls"), col = seq(18, 78, 6), gap = 2)
+pres_2022_R1_departements_cleaned <- lire(pres_2022_R1_departements, 
+                                          keep = c(1, 2, 4, 5, 9, 12, 15),
+                                          #keep.names = c("Code du département", "Libellé du département", "Inscrits", "Abstentions", "Blancs", "Nuls", "Exprimés"), 
+                                          col = c(seq(19, 85, by = 6)), gap = 2)
 
 pres_2022_R1_departements_cleaned <- pres_2022_R1_departements_cleaned %>% 
   # put geographical codes in the right format
@@ -19,11 +24,13 @@ pres_2022_R1_departements_cleaned <- pres_2022_R1_departements_cleaned %>%
   mutate(Nuls_vot = Nuls / Votants * 100) %>% 
   mutate(Exprimés_ins = Exprimés / Inscrits * 100) %>% 
   mutate (Exprimés_vot = Exprimés / Votants * 100) %>% 
-  # specify integers %>% 
-  mutate(across(c(Inscrits, Abstentions, Votants, Blancs, Nuls, Exprimés, `LE PEN`:CHEMINADE), as.integer)) %>% 
-  # reorder
-  select(CodeDépartement, Département = `Libellé du département`, Inscrits, Abstentions, Abstentions_ins, Votants, Votants_ins, Blancs, Blancs_ins, Blancs_vot, Nuls, Nuls_ins, Nuls_vot, Exprimés, Exprimés_ins, Exprimés_vot, `LE PEN`:CHEMINADE, `LE PEN_ins`:CHEMINADE_exp) %>% 
-  # nicer, more modern dataframe class
+  mutate(across(c(Inscrits, Abstentions, Votants, Blancs, Nuls, Exprimés, `ARTHAUD`:`DUPONT-AIGNAN`), as.integer)) %>% 
+  select(CodeDépartement, Département = `Libellé du département`, Inscrits, Abstentions, Abstentions_ins, Votants, Votants_ins, 
+         Blancs, Blancs_ins, Blancs_vot, Nuls, Nuls_ins, Nuls_vot, Exprimés, Exprimés_ins, Exprimés_vot, 
+         `ARTHAUD`:`DUPONT-AIGNAN`, `ARTHAUD.ins`:`DUPONT-AIGNAN.exp`) %>% 
   as_tibble()
 
-write_excel_csv(pres_2022_R1_departements_cleaned, path = "./P2022_Resultats_Département_T1.csv")
+write_excel_csv(pres_2022_R1_departements_cleaned, path = "./data/P2022_Resultats_Département_T1.csv")
+rio::export(pres_2022_R1_departements_cleaned, file = "./data/P2022_Resultats_Département_T1.xlsx")
+
+
