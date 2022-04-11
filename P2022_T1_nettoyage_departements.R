@@ -13,7 +13,6 @@ pres_2022_R1_departements_cleaned <- lire(pres_2022_R1_departements,
                                           col = c(seq(19, 85, by = 6)), gap = 2)
 
 pres_2022_R1_departements_cleaned <- pres_2022_R1_departements_cleaned %>% 
-  # put geographical codes in the right format
   mutate(CodeDépartement = str_pad(`Code du département`, 2, "left", "0")) %>% 
   mutate(Votants = Inscrits - Abstentions) %>% 
   mutate(Votants_ins = Votants / Inscrits * 100) %>% 

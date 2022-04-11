@@ -14,7 +14,6 @@ pres_2022_R1_circonscriptions_cleaned <- lire(pres_2022_R1_circonscriptions,
                                               col = c(seq(22, 99, 7)), gap = 2)
 
 pres_2022_R1_circonscriptions_cleaned <- pres_2022_R1_circonscriptions_cleaned %>% 
-  # put geographical codes in the right format
   mutate(CodeDépartement = str_pad(`Code du département`, 2, "left", "0")) %>% 
   mutate(NumeroCirco = str_pad(`Code de la circonscription`, 2, "left", "0")) %>%
   mutate(CodeCirco = paste0(CodeDépartement, NumeroCirco)) %>% 

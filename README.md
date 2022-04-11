@@ -16,8 +16,8 @@ All raw files of the electoral results are located in the `data-raw/` folder.
 ## ÉLECTIONS
 
 ### Présidentielle 2022 - Premier tour
-- [Presidential election 2022 (round 1) - national, région, départements, cantons, circonscription](https://www.data.gouv.fr)
-- [Presidential election 2022 (round 1) - communes](https://www.data.gouv.fr)
+- [Presidential election 2022 (round 1) - national, région, départements, cantons, circonscription](https://www.data.gouv.fr/fr/datasets/election-presidentielle-des-10-et-24-avril-2022-resultats-du-1er-tour/)
+- [Presidential election 2022 (round 1) - communes](https://www.data.gouv.fr/fr/datasets/election-presidentielle-des-10-et-24-avril-2022-resultats-du-1er-tour/)
 - [Presidential election 2022 (round 1) - bureaux de vote](https://www.data.gouv.fr)
 
 ### Présidentielle 2022 - Second tour

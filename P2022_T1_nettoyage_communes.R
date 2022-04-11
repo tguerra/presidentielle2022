@@ -3,16 +3,18 @@ library(stringr) # manipulate string of characters
 library(LireMinInterieur) # transform electoral files
 library(tidyverse) # the tidyverse...
 
-pres_2022_R1_communes <- read_excel("./data-raw/XXXX.xls", skip = 3, guess_max = 36000)
+pres_2022_R1_communes <- read_excel("./data-raw/2022/resultats-par-niveau-subcom-t1-france-entiere.xlsx", guess_max = 36000) %>% mutate(Inscrits = as.numeric(Inscrits))
 
-pres_22_R1_communes_cleaned <- lire(pres_2022_R1_communes, keep = c("Code du département", "Code de la commune", "Inscrits", "Abstentions", "Exprimés", "Blancs", "Nuls"), col = seq(21, 91, 7), gap = 2)
+pres_22_R1_communes_cleaned <- lire(pres_2022_R1_communes, 
+                                    keep = c("Code du département", "Code de la commune", "Libellé de la commune", 
+                                             "Inscrits", "Abstentions", "Exprimés", "Blancs", "Nuls"), 
+                                    col = seq(22, 99, 7), 
+                                    gap = 2)
 
 pres_2022_R1_communes_cleaned <- pres_22_R1_communes_cleaned %>% 
-  # put geographical codes in the right format
   mutate(CodeDepartement = str_pad(string = `Code du département`, width = 2, side = "left", pad = "0")) %>% # has to be in a format like "02"
   mutate(CodeCommune = str_pad(string = `Code de la commune`, width = 3, side = "left", pad = "0")) %>% 
   mutate(CodeInsee = paste0(CodeDepartement, CodeCommune)) %>%  # unique commune ID
-  # computing missing values
   mutate(Votants = Inscrits - Abstentions) %>% 
   mutate(Votants_ins = Votants / Inscrits * 100) %>% 
   mutate(Abstentions_ins = Abstentions / Inscrits * 100) %>% 
@@ -22,13 +24,12 @@ pres_2022_R1_communes_cleaned <- pres_22_R1_communes_cleaned %>%
   mutate(Nuls_vot = Nuls / Votants * 100) %>% 
   mutate(Exprimés_ins = Exprimés / Inscrits * 100) %>% 
   mutate (Exprimés_vot = Exprimés / Votants * 100) %>% 
-  # specify integers %>% 
-  mutate(across(c(Inscrits, Abstentions, Votants, Blancs, Nuls, Exprimés, `LE PEN`:CHEMINADE), as.integer)) %>% 
-  # reorder
-  select(CodeInsee, CodeDepartement, Inscrits, Abstentions, Abstentions_ins, Votants, Votants_ins, Blancs, Blancs_ins, Blancs_vot, Nuls, Nuls_ins, Nuls_vot, Exprimés, Exprimés_ins, Exprimés_vot, `LE PEN`:CHEMINADE, `LE PEN_ins`:CHEMINADE_exp) %>% 
-  # nicer, more modern dataframe class
+  mutate(across(c(Inscrits, Abstentions, Votants, Blancs, Nuls, Exprimés, `ARTHAUD`:`DUPONT-AIGNAN`), as.integer)) %>% 
+  select(CodeInsee, CodeDepartement, Commune = `Libellé de la commune`, Inscrits, Abstentions, Abstentions_ins, Votants, Votants_ins, 
+         Blancs, Blancs_ins, Blancs_vot, Nuls, Nuls_ins, Nuls_vot, Exprimés, Exprimés_ins, Exprimés_vot, 
+         `LE PEN`:`DUPONT-AIGNAN`, `ARTHAUD.ins`:`DUPONT-AIGNAN.exp`) %>% 
   as_tibble()
 
 readr::write_excel_csv(pres_2022_R1_communes_cleaned, path = "./data/P2022_Resultats_Communes_T1.csv")
-
+rio::export(pres_2022_R1_communes_cleaned, file = "./data/P2022_Resultats_Communes_T1.xlsx")
 
