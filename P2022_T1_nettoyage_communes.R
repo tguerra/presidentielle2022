@@ -27,9 +27,9 @@ pres_2022_R1_communes_cleaned <- pres_22_R1_communes_cleaned %>%
   mutate(across(c(Inscrits, Abstentions, Votants, Blancs, Nuls, Exprimés, `ARTHAUD`:`DUPONT-AIGNAN`), as.integer)) %>% 
   select(CodeInsee, CodeDepartement, Commune = `Libellé de la commune`, Inscrits, Abstentions, Abstentions_ins, Votants, Votants_ins, 
          Blancs, Blancs_ins, Blancs_vot, Nuls, Nuls_ins, Nuls_vot, Exprimés, Exprimés_ins, Exprimés_vot, 
-         `LE PEN`:`DUPONT-AIGNAN`, `ARTHAUD.ins`:`DUPONT-AIGNAN.exp`) %>% 
+         `ARTHAUD`:`DUPONT-AIGNAN`, `ARTHAUD.ins`:`DUPONT-AIGNAN.exp`) %>% 
   as_tibble()
 
-readr::write_excel_csv(pres_2022_R1_communes_cleaned, path = "./data/P2022_Resultats_Communes_T1.csv")
+write_excel_csv(pres_2022_R1_communes_cleaned, path = "./data/P2022_Resultats_Communes_T1.csv")
 rio::export(pres_2022_R1_communes_cleaned, file = "./data/P2022_Resultats_Communes_T1.xlsx")
 
