@@ -4,7 +4,7 @@ library(LireMinInterieur) # transform electoral files
 library(tidyverse) # the tidyverse...
 
 pres_2022_R1_regions <- read_excel("./data-raw/2022/resultats-par-niveau-reg-t1-france-entiere.xlsx", 
-                                   guess_max = 25, sheet = "Résultats par niveau Reg T1 Fra") %>%
+                                   guess_max = 25, sheet = 1) %>%
   mutate(Inscrits = as.numeric(Inscrits))
 
 pres_2022_R1_regions_cleaned <- lire(pres_2022_R1_regions, 
@@ -27,6 +27,6 @@ pres_2022_R1_regions_cleaned <- pres_2022_R1_regions_cleaned %>%
          `ARTHAUD`:`DUPONT-AIGNAN`, `ARTHAUD.ins`:`DUPONT-AIGNAN.exp`) %>% 
   as_tibble()
 
-write_excel_csv(pres_2022_R1_regions_cleaned, path = "./data/P2022_Resultats_Régions_T1.csv")
+readr::write_excel_csv(pres_2022_R1_regions_cleaned, path = "./data/P2022_Resultats_Régions_T1.csv")
 rio::export(pres_2022_R1_regions_cleaned, file = "./data/P2022_Resultats_Régions_T1.xlsx")
 

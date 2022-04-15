@@ -4,7 +4,7 @@ library(LireMinInterieur) # transform electoral files
 library(tidyverse) # the tidyverse...
 
 pres_2022_R1_circonscriptions <- read_excel("./data-raw/2022/resultats-par-niveau-cirlg-t1-france-entiere.xlsx", 
-                                            guess_max = 600, sheet = "Résultats par niveau CirLG T1 F") %>%
+                                            guess_max = 600, sheet = 1) %>%
                                 mutate(Inscrits = as.numeric(Inscrits))
 
 pres_2022_R1_circonscriptions_cleaned <- lire(pres_2022_R1_circonscriptions, 
@@ -34,4 +34,3 @@ pres_2022_R1_circonscriptions_cleaned <- pres_2022_R1_circonscriptions_cleaned %
 
 write_excel_csv(pres_2022_R1_circonscriptions_cleaned, path = "./data/P2022_Resultats_Circonscriptions_T1.csv")
 rio::export(pres_2022_R1_circonscriptions_cleaned, file = "./data/P2022_Resultats_Circonscriptions_T1.xlsx")
-write_excel_csv(pres_2017_R1_circonscriptions_cleaned, path = "./data/P2022_Resultats_Circonscription_T1.csv")

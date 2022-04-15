@@ -30,6 +30,6 @@ pres_2022_R1_communes_cleaned <- pres_22_R1_communes_cleaned %>%
          `ARTHAUD`:`DUPONT-AIGNAN`, `ARTHAUD.ins`:`DUPONT-AIGNAN.exp`) %>% 
   as_tibble()
 
-write_excel_csv(pres_2022_R1_communes_cleaned, path = "./data/P2022_Resultats_Communes_T1.csv")
+readr::write_excel_csv(pres_2022_R1_communes_cleaned, path = "./data/P2022_Resultats_Communes_T1.csv")
 rio::export(pres_2022_R1_communes_cleaned, file = "./data/P2022_Resultats_Communes_T1.xlsx")
 
